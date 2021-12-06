@@ -36,7 +36,7 @@ def part_two(depths=DEPTHS):
     # 260      G H
     # 263        H
     #
-    # Since the last two numbers of A equal the last two numbers of B, we only need to compare the fist of A with the last of B
+    # Since the last two numbers of A equal the first two numbers of B, we only need to compare the fist of A with the last of B
 
     for i in range(3, len(depths)):
         if depths[i - 3] < depths[i]:
