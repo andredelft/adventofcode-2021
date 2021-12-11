@@ -28,9 +28,7 @@ def parse_input(lines=LINES):
     return coordinates
 
 
-def part_one(lines=LINES):
-    coordinates = parse_input(lines)
-
+def gen_field(coordinates):
     x_max = 0
     y_max = 0
 
@@ -38,34 +36,47 @@ def part_one(lines=LINES):
         x = max(x1, x2)
         y = max(y1, y2)
 
-        if x > x_max:
-            x_max = x
-        if y > y_max:
-            y_max = y
+        x_max = max(x, x_max)
+        y_max = max(y, y_max)
 
-    print(f"Field dimensions: {x_max} x {y_max}")
+    print(f"Field dimensions: {x_max + 1} x {y_max + 1}")
 
-    field = [[0 for _ in range(x_max + 1)] for _ in range(y_max + 1)]
+    return [[0 for _ in range(x_max + 1)] for _ in range(y_max + 1)]
+
+
+def print_field(field):
+    field_transposed = [[0 for _ in range(len(field))] for _ in range(len(field[0]))]
+
+    for i in range(len(field)):
+        for j in range(len(field[0])):
+            field_transposed[j][i] = field[i][j]
+
+    print(
+        "\n".join(
+            " ".join(str(cell) if cell else "." for cell in row)
+            for row in field_transposed
+        )
+    )
+
+
+def part_one(lines=LINES):
+    coordinates = parse_input(lines)
+
+    field = gen_field(coordinates)
 
     for ((x1, y1), (x2, y2)) in coordinates:
         if x1 == x2:
-            y_from = min(y1, y2)
-            y_to = max(y1, y2)
-            for y in range(y_from, y_to + 1):
+            for y in range(min(y1, y2), max(y1, y2) + 1):
                 field[x1][y] += 1
         elif y1 == y2:
-            x_from = min(x1, x2)
-            x_to = max(x1, x2)
-            for x in range(x_from, x_to + 1):
+            for x in range(min(x1, x2), max(x1, x2) + 1):
                 field[x][y1] += 1
-
-    # print("\n".join(" ".join(f"{n: >2}" for n in row) for row in field))
 
     num_crossroads = 0
 
-    for x in range(x_max + 1):
-        for y in range(y_max + 1):
-            if field[x][y] >= 2:
+    for row in field:
+        for cell in row:
+            if cell >= 2:
                 num_crossroads += 1
 
     print(f"{num_crossroads} number of crossroads found")
@@ -74,47 +85,40 @@ def part_one(lines=LINES):
 def part_two(lines=LINES):
     coordinates = parse_input(lines)
 
-    x_max = 0
-    y_max = 0
-
-    for ((x1, y1), (x2, y2)) in coordinates:
-        x = max(x1, x2)
-        y = max(y1, y2)
-
-        if x > x_max:
-            x_max = x
-        if y > y_max:
-            y_max = y
-
-    print(f"Field dimensions: {x_max} x {y_max}")
-
-    field = [[0 for _ in range(x_max + 1)] for _ in range(y_max + 1)]
+    field = gen_field(coordinates)
 
     for ((x1, y1), (x2, y2)) in coordinates:
         if x1 == x2:
-            y_from = min(y1, y2)
-            y_to = max(y1, y2)
-            for y in range(y_from, y_to + 1):
+            for y in range(min(y1, y2), max(y1, y2) + 1):
                 field[x1][y] += 1
         elif y1 == y2:
-            x_from = min(x1, x2)
-            x_to = max(x1, x2)
-            for x in range(x_from, x_to + 1):
+            for x in range(min(x1, x2), max(x1, x2) + 1):
                 field[x][y1] += 1
         else:
-            pass  # TODO: Handle diagonals!
+            if x1 > x2:
+                # Swap coordinates, such that x1 < x2 is guaranteed
+                x3, y3 = (x1, y1)
+                x1, y1 = (x2, y2)
+                x2, y2 = (x3, y3)
 
-    # print("\n".join(" ".join(f"{n: >2}" for n in row) for row in field))
+            y_coord_iterator = (
+                range(y1, y2 + 1) if (y1 < y2) else reversed(list(range(y2, y1 + 1)))
+            )
+
+            for x, y in zip(range(x1, x2 + 1), y_coord_iterator):
+                field[x][y] += 1
 
     num_crossroads = 0
 
-    for x in range(x_max + 1):
-        for y in range(y_max + 1):
-            if field[x][y] >= 2:
+    for row in field:
+        for cell in row:
+            if cell >= 2:
                 num_crossroads += 1
 
+    # print_field(field)
     print(f"{num_crossroads} number of crossroads found")
 
 
 if __name__ == "__main__":
     part_one()
+    part_two()
