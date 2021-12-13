@@ -1,4 +1,5 @@
 from pathlib import Path
+import re
 
 
 DAY_DIR = Path(__file__).parent
@@ -8,13 +9,12 @@ with open(DAY_DIR / "input.txt") as f:
 
 
 def parse_input(input):
-    # Parse the input here
-
-    return input
+    return [int(n) for n in re.findall("\d+", input)]
 
 
 def part_one(input=INPUT):
-    parsed_input = parse_input(input)
+    crab_positions = parse_input(input)
+    print(crab_positions)
 
 
 def part_two(input=INPUT):

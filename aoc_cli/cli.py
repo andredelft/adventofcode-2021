@@ -70,3 +70,10 @@ def run_day(day_number):
     if not entrypoint:
         raise click.ClickException(f"No entrypoint found for day {day_number}")
     os.system(f'python {gen_day_dir(day_number) / Path(entrypoint).with_suffix(".py")}')
+
+
+@click.command()
+@click.argument("day_number", type=int)
+def test_day(day_number):
+    test_file = f"test_{gen_day_dir(day_number).stem}.py"
+    os.system(f"python {TEST_ROOT / test_file}")

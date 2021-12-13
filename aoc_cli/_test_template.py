@@ -12,3 +12,8 @@ def test_part_one():
 
 def test_part_two():
     assert part_two(TEST_INPUT) == PART_TWO_TEST_OUTPUT
+
+
+if __name__ == "__main__":
+    test_part_one()
+    test_part_two()

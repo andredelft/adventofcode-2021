@@ -12,6 +12,7 @@ setup(
         "console_scripts": [
             "new-day = aoc_cli.cli:gen_day",
             "run-day = aoc_cli.cli:run_day",
+            "test-day = aoc_cli.cli:test_day",
         ],
     },
 )
