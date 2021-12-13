@@ -54,8 +54,10 @@ def gen_day(module_name):
         pass
 
     # Test file
-    test_template = re.sub(r"(?<!\w)_template(?!\w)", module_name, TEST_TEMPLATE)
-    with (day_dir / "test_today.py").open("w") as f:
+    test_template = re.sub(
+        r"(?<!\w)_template(?!\w)", f"{day_dir}.{module_name}", TEST_TEMPLATE
+    )
+    with (day_dir / f"{module_name}_test.py").open("w") as f:
         f.write(test_template)
 
 

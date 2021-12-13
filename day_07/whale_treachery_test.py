@@ -1,4 +1,4 @@
-from whale_treachery import part_one, part_two
+from day_07.whale_treachery import part_one, part_two
 
 TEST_INPUT = ""
 
