@@ -9,6 +9,7 @@ CDIR = Path(__file__).parent
 TEMPLATE_FILE = CDIR / "_template.py"
 TEST_TEMPLATE_FILE = CDIR / "_test_template.py"
 ENTRYPOINTS_FILE = CDIR / "day_entrypoints.yml"
+TEST_ROOT = Path("tests")
 
 with TEMPLATE_FILE.open() as f:
     TEMPLATE = f.read()
@@ -55,9 +56,10 @@ def gen_day(module_name):
 
     # Test file
     test_template = re.sub(
-        r"(?<!\w)_template(?!\w)", f"{day_dir}.{module_name}", TEST_TEMPLATE
+        r"(?<!\w)_template(?!\w)", f"{day_dir.stem}.{module_name}", TEST_TEMPLATE
     )
-    with (day_dir / f"{module_name}_test.py").open("w") as f:
+
+    with (TEST_ROOT / f"test_{day_dir.stem}.py").open("w") as f:
         f.write(test_template)
 
 
