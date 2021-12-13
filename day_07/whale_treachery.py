@@ -6,15 +6,19 @@ DAY_DIR = Path(__file__).parent
 with open(DAY_DIR / "input.txt") as f:
     INPUT = f.read()
 
-TEST_INPUT = ""
+
+def parse_input(input):
+    # Parse the input here
+
+    return input
 
 
-def part_one():
-    pass
+def part_one(input=INPUT):
+    parsed_input = parse_input(input)
 
 
-def part_two():
-    pass
+def part_two(input=INPUT):
+    parsed_input = parse_input(input)
 
 
 if __name__ == "__main__":

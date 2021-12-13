@@ -2,16 +2,21 @@ import click
 import yaml
 from pathlib import Path
 import os
+import re
 
 CDIR = Path(__file__).parent
 
 TEMPLATE_FILE = CDIR / "_template.py"
+TEST_TEMPLATE_FILE = CDIR / "_test_template.py"
 ENTRYPOINTS_FILE = CDIR / "day_entrypoints.yml"
 
-with open(TEMPLATE_FILE) as f:
+with TEMPLATE_FILE.open() as f:
     TEMPLATE = f.read()
 
-with open(ENTRYPOINTS_FILE) as f:
+with TEST_TEMPLATE_FILE.open() as f:
+    TEST_TEMPLATE = f.read()
+
+with ENTRYPOINTS_FILE.open() as f:
     ENTRYPOINTS = yaml.safe_load(f)
 
 
@@ -26,22 +31,32 @@ def gen_day_dir(day_number: int) -> Path:
 
 
 @click.command()
-@click.argument("filename")
-def gen_day(filename):
+@click.argument("module_name")
+def gen_day(module_name):
     day_number = 1
     while gen_day_dir(day_number).is_dir():
         day_number += 1
 
-    filename = Path(filename)
-    if not filename.suffix:
-        filename = filename.with_suffix(".py")
+    module_name = Path(module_name).stem
+    filename = Path(module_name).with_suffix(".py")
 
     add_entrypoint(day_number, filename)
 
     day_dir = gen_day_dir(day_number)
     day_dir.mkdir(parents=True, exist_ok=True)
-    with (gen_day_dir(day_number) / filename).open("w") as f:
+
+    # Main code file
+    with (day_dir / filename).open("w") as f:
         f.write(TEMPLATE)
+
+    # Blank input file
+    with (day_dir / "input.txt").open("w") as f:
+        pass
+
+    # Test file
+    test_template = re.sub(r"(?<!\w)_template(?!\w)", module_name, TEST_TEMPLATE)
+    with (day_dir / "test_today.py").open("w") as f:
+        f.write(test_template)
 
 
 @click.command()
