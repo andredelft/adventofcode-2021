@@ -8,7 +8,7 @@ CDIR = Path(__file__).parent
 
 TEMPLATE_FILE = CDIR / "_template.py"
 TEST_TEMPLATE_FILE = CDIR / "_test_template.py"
-ENTRYPOINTS_FILE = CDIR / "day_entrypoints.yml"
+ENTRYPOINTS_FILE = Path("day_entrypoints.yml")
 TEST_ROOT = Path("tests")
 
 with TEMPLATE_FILE.open() as f:
