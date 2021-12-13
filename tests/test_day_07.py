@@ -2,8 +2,8 @@ from day_07.whale_treachery import part_one, part_two
 
 TEST_INPUT = "16,1,2,0,4,2,7,1,2,14"
 
-PART_ONE_TEST_OUTPUT = None
-PART_TWO_TEST_OUTPUT = None
+PART_ONE_TEST_OUTPUT = 37
+PART_TWO_TEST_OUTPUT = 168
 
 
 def test_part_one():
