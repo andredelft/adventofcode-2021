@@ -1,9 +1,14 @@
 from day_09.smoke_basin import part_one, part_two
 
-TEST_INPUT = ""
+TEST_INPUT = """\
+2199943210
+3987894921
+9856789892
+8767896789
+9899965678"""
 
-PART_ONE_TEST_OUTPUT = None
-PART_TWO_TEST_OUTPUT = None
+PART_ONE_TEST_OUTPUT = 15
+PART_TWO_TEST_OUTPUT = 1134
 
 
 def test_part_one():
