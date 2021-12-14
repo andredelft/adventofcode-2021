@@ -1,4 +1,4 @@
-from day_06.lanternfish import part_one, part_two
+from lanternfish import part_one, part_two
 
 TEST_INPUT = "3,4,3,1,2"
 

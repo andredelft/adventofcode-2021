@@ -1,4 +1,4 @@
-from day_10.syntax_scoring import part_one, part_two
+from syntax_scoring import part_one, part_two
 
 TEST_INPUT = """\
 [({(<(())[]>[[{[]{<()<>>

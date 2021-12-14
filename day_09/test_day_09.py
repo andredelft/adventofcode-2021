@@ -1,4 +1,4 @@
-from day_09.smoke_basin import part_one, part_two
+from smoke_basin import part_one, part_two
 
 TEST_INPUT = """\
 2199943210

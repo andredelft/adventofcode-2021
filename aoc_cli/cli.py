@@ -9,7 +9,6 @@ CDIR = Path(__file__).parent
 TEMPLATE_FILE = CDIR / "_template.py"
 TEST_TEMPLATE_FILE = CDIR / "_test_template.py"
 ENTRYPOINTS_FILE = Path("day_entrypoints.yml")
-TEST_ROOT = Path("tests")
 
 with TEMPLATE_FILE.open() as f:
     TEMPLATE = f.read()
@@ -55,11 +54,9 @@ def gen_day(module_name):
         pass
 
     # Test file
-    test_template = re.sub(
-        r"(?<!\w)_template(?!\w)", f"{day_dir.stem}.{module_name}", TEST_TEMPLATE
-    )
+    test_template = re.sub(r"(?<!\w)_template(?!\w)", module_name, TEST_TEMPLATE)
 
-    with (TEST_ROOT / f"test_{day_dir.stem}.py").open("w") as f:
+    with (day_dir / f"test_{day_dir.stem}.py").open("w") as f:
         f.write(test_template)
 
 
@@ -75,5 +72,6 @@ def run_day(day_number):
 @click.command()
 @click.argument("day_number", type=int)
 def test_day(day_number):
-    test_file = f"test_{gen_day_dir(day_number).stem}.py"
-    os.system(f"python {TEST_ROOT / test_file}")
+    day_dir = gen_day_dir(day_number)
+    test_file = f"test_{day_dir.stem}.py"
+    os.system(f"python {day_dir / test_file}")

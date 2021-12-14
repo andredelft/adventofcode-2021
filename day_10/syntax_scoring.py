@@ -1,5 +1,5 @@
 from pathlib import Path
-from day_10.brackets import check_syntax, IllegalCharacter, IncompleteLine, BRACKET_MAP
+from brackets import check_syntax, IllegalCharacter, IncompleteLine, BRACKET_MAP
 
 DAY_DIR = Path(__file__).parent
 

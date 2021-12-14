@@ -1,4 +1,4 @@
-from day_08.seven_segment_search import part_one, part_two
+from seven_segment_search import part_one, part_two
 
 TEST_INPUT = """be cfbegad cbdgef fgaecd cgeb fdcge agebfd fecdb fabcd edb | fdgacbe cefdb cefbgd gcbe
 edbfga begcd cbg gc gcadebf fbgde acbgfd abcde gfcbed gfec | fcgedb cgb dgebacf gc

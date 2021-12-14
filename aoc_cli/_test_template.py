@@ -1,6 +1,7 @@
 from _template import part_one, part_two
 
-TEST_INPUT = ""
+TEST_INPUT = """\
+"""
 
 PART_ONE_TEST_OUTPUT = None
 PART_TWO_TEST_OUTPUT = None
