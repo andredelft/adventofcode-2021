@@ -59,6 +59,8 @@ def part_one(input_string=INPUT_STRING):
 
     print(f"{len(coordinates)} dots left after 1 fold")
 
+    return len(coordinates)
+
 
 def part_two(input_string=INPUT_STRING):
     coordinates, folds = parse_input(input_string)

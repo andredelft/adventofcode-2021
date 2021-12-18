@@ -23,7 +23,7 @@ TEST_INPUT = """\
 fold along y=7
 fold along x=5"""
 
-PART_ONE_TEST_OUTPUT = None
+PART_ONE_TEST_OUTPUT = 17
 PART_TWO_TEST_OUTPUT = None
 
 
