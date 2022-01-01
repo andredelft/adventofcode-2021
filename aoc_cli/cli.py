@@ -3,6 +3,7 @@ import yaml
 from pathlib import Path
 import os
 import re
+from aocd import get_data
 
 CDIR = Path(__file__).parent
 
@@ -49,9 +50,9 @@ def gen_day(module_name):
     with (day_dir / filename).open("w") as f:
         f.write(TEMPLATE)
 
-    # Blank input file
+    # Input file
     with (day_dir / "input.txt").open("w") as f:
-        pass
+        f.write(get_data(day=day_number))
 
     # Test file
     test_template = re.sub(r"(?<!\w)_template(?!\w)", module_name, TEST_TEMPLATE)
