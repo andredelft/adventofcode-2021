@@ -1,27 +1,16 @@
 from passage_pathing import part_one, part_two
 
 TEST_INPUT = """\
-fs-end
-he-DX
-fs-he
-start-DX
-pj-DX
-end-zg
-zg-sl
-zg-pj
-pj-he
-RW-he
-fs-DX
-pj-RW
-zg-RW
-start-pj
-he-WI
-zg-he
-pj-fs
-start-RW"""
+start-A
+start-b
+A-c
+A-b
+b-d
+A-end
+b-end"""
 
-PART_ONE_TEST_OUTPUT = 226
-PART_TWO_TEST_OUTPUT = None
+PART_ONE_TEST_OUTPUT = 10
+PART_TWO_TEST_OUTPUT = 36
 
 
 def test_part_one():
@@ -33,5 +22,5 @@ def test_part_two():
 
 
 if __name__ == "__main__":
-    test_part_one()
+    # test_part_one()
     test_part_two()

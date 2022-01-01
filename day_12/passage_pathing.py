@@ -18,11 +18,11 @@ def parse_input(input_string):
         for i in [0, 1]:
             edges[edge[i]] = edges.get(edge[i], []) + [edge[1 - i]]
 
-    return nodes, edges
+    return edges
 
 
 def part_one(input_string=INPUT_STRING, PathClass=PathTracker):
-    _, edges = parse_input(input_string)
+    edges = parse_input(input_string)
 
     active_paths = [PathClass() + "start"]
     finished_paths = []
@@ -30,11 +30,13 @@ def part_one(input_string=INPUT_STRING, PathClass=PathTracker):
 
     while active_paths:
         path = active_paths.pop(0)
-        available_nodes = [
-            node for node in edges[path.current_node()] if path.is_available(node)
-        ]
-        if available_nodes:
-            new_paths = [(path + node) for node in available_nodes]
+
+        new_paths = []
+        for node in edges[path.current_node()]:
+            if path.is_available(node):
+                new_paths.append(path + node)
+
+        if new_paths:
             for new_path in new_paths:
                 if new_path.current_node() == "end":
                     finished_paths.append(new_path)
@@ -43,14 +45,14 @@ def part_one(input_string=INPUT_STRING, PathClass=PathTracker):
         else:
             stranded_paths.append(path)
 
-    # print("Finished paths:\n", "\n".join(str(path) for path in finished_paths))
-    # print("Stranded paths:\n", "\n".join(str(path) for path in stranded_paths))
+    # print("Finished paths:", "\n".join(str(path) for path in finished_paths), sep="\n")
+    # print("Stranded paths:", "\n".join(str(path) for path in stranded_paths), sep="\n")
     print(f"{len(finished_paths)} paths finished, {len(stranded_paths)} stranded")
     return len(finished_paths)
 
 
 def part_two(input_string=INPUT_STRING):
-    part_one(input_string, PathClass=PathTracker2)
+    return part_one(input_string, PathClass=PathTracker2)
 
 
 if __name__ == "__main__":
